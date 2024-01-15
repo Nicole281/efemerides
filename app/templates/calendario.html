@@ -1,0 +1,91 @@
+{% load static %}
+
+{% block css %}  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+  <link rel="stylesheet" href="{% static 'app/css/calendario.css' %}">
+{% endblock %}
+
+{% block js %}
+<script>
+  var efemerides = {{ efemerides|safe }};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/es.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'app/js/calendario.js' %}"></script>
+<script>
+  $(document).ready(function () {
+      $('#calendar-9').fullCalendar({
+          events: [
+              {% for efemeride in efemerides %}
+                  {
+                      title: '{{ efemeride.descripcion }}',
+                      start: '{{ efemeride.fecha }}'
+                  },
+              {% endfor %}
+          ],
+          header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay,listWeek'
+          },
+      });
+  });
+</script>
+<script id="efemerides-data" type="application/json">
+  {{ efemerides|safe }}
+
+</script>
+{% endblock %}
+
+{% block contenido %}
+<div class="container fluid">
+   <div class="d-flex justify-content-end">
+     <a class="back-button ml-auto" href="#" onclick="goBack()"><i class="fa fa-arrow-left back-icon"></i></a>
+   </div>
+  <div class="col-lg-10 col-md-12 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <!-- Agrega el contenedor del calendario -->
+        <div id="calendar-9" class="w-100" height="600px"></div> <!-- Aplica un ancho del 100% al contenedor del calendario -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal para agregar/editar eventos -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario para agregar/editar un evento -->
+        <form>
+          <div class="form-group">
+            <label for="nombreEvento" class="form-floating">Nombre del evento</label>
+            <input type="text" class="form-control" id="nombreEvento" placeholder="Escribe el nombre del evento">
+          </div>
+          <div class="form-group">
+            <label for="descripcionEvento" class="form-floating">Descripción</label>
+            <textarea class="form-control" id="descripcionEvento" placeholder="Describe el evento"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fechaInicio">Fecha de inicio</label>
+            <input type="datetime-local" class="form-control" id="fechaInicio" placeholder="Selecciona la fecha y hora de inicio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="guardarEventoBtn">Guardar evento</button>
+        <button type="button" class="btn btn-warning" id="borrarEventoBtn" style="display: none;">Borrar evento</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contenedor para mensajes SweetAlert -->
+<div id="swal-container"></div>
+{% endblock %}

@@ -1,0 +1,86 @@
+/* Establece la imagen de fondo para el cuerpo */
+body { 
+    background-image: url('/static/app/img/informe_notas.png'); 
+  }
+  
+  /* Estilos específicos para el calendario en calendario.css */
+  #calendar-9 {
+    margin-top: 10px;
+    border-radius: 10px;  /* Agrega un borde redondeado si lo deseas */
+    padding: 15px;  /* Ajusta el relleno según sea necesario */
+    background-color: rgba(255, 253, 253, 0.952);
+  
+    
+  }
+  
+  /* Estilos para la tarjeta (card) que contiene el calendario */
+  .card {
+    margin-top: 40px; /* Ajusta el valor según sea necesario */
+    background-color: rgb(43, 106, 114);
+  }
+  
+  /* Estilos para los botones en el encabezado del calendario */
+  .fc-button {
+    background-color: rgb(0, 180, 188); 
+    color: #f7f1f1;
+    border: none;
+  }
+  
+  /* Estilos para el botón "Nuevo evento" */
+  .fc-addEventButton-button {
+    font-size: 17px;
+    padding: 0.5em 2em;
+    border: transparent;
+    background: dodgerblue;
+    color: white;
+    border-radius: 4px;
+    top: 15px;
+  }
+  
+  /* Estilos para el contenido del popover (cuando se hace clic en un evento) */
+  .popover-content {
+    color: #75a6d6;
+  }
+  
+  /* Estilos para los inputs en los modales */
+  .modal-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  /* Asegura que los estilos hover estén bien definidos para los botones */
+  .fc-button:hover  {
+    background-color: #548ac4; /* Color más oscuro al hacer hover */
+  }
+  
+  .fc-addEventButton-button:hover {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+  }
+  
+  /* Evita que el hover afecte a otras partes y define transiciones suaves */
+  .fc-button, .fc-addEventButton-button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    outline: none; /* Evita el resaltado predeterminado del botón */
+    background-image: none; /* Restablece el estilo para asegurarte de que no haya reglas conflictivas */
+  }
+  
+  /* Estilo adicional para el botón "Nuevo evento" */
+  .custom-add-event-button {
+    margin-bottom: 20px; /* Ajusta el margen inferior según sea necesario */
+  }
+  
+  /* Estilos de hover para resaltar cada día en el calendario */
+  .fc-day:hover {
+    background-color: #e0e0e09d; /* Cambia el color de fondo en hover según tus preferencias */
+    cursor: pointer; /* Cambia el cursor a pointer para indicar interactividad */
+  }
+  
+  /* Opcional: Estilo para destacar el día actual */
+  .fc-today {
+    background-color: #f0f0f0;
+  }
+  
